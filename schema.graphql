@@ -12,7 +12,16 @@ type Pool @entity {
   startTime: BigInt!
   periodFinish: BigInt!
   duration: BigInt!
-  staked: BigInt!
+  balance: BigInt!
   rewardAllocated: BigInt!
   rewardPaid: BigInt!
+}
+
+type PoolHourData @entity {
+  id: ID!
+  hourStartUnix: Int!
+  pool: Pool!
+  balance: BigInt!
+  hourlyDepositVolume: BigInt!
+  hourlyWithdrawalVolume: BigInt!
 }

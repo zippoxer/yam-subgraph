@@ -136,143 +136,143 @@ dataSources:
           handler: handleRewardAdded
         - event: RewardPaid(indexed address,uint256)
           handler: handleRewardPaid
-  # - name: YAMMKRPool
-  #   kind: ethereum/contract
-  #   network: mainnet
-  #   source:
-  #     address: "0xcfe1e539acb2d489a651ca011a6eb93d32f97e23"
-  #     abi: YAMMKRPool
-  #     startBlock: 10636560
-  #   mapping:
-  #     kind: ethereum/events
-  #     apiVersion: 0.0.4
-  #     language: wasm/assemblyscript
-  #     file: ./src/pools.ts
-  #     entities:
-  #       - Pool
-  #     abis:
-  #       - name: YAMMKRPool
-  #         file: ./abis/YAMMKRPool.json
-  #       - name: YAM
-  #         file: ./abis/YAM.json
-  #     eventHandlers:
-  #       - event: Staked(indexed address,uint256)
-  #         handler: handleStaked
-  #       - event: Withdrawn(indexed address,uint256)
-  #         handler: handleWithdrawn
-  #       - event: RewardAdded(uint256)
-  #         handler: handleRewardAdded
-  #       - event: RewardPaid(indexed address,uint256)
-  #         handler: handleRewardPaid
-  # - name: YAMSNXPool
-  #   kind: ethereum/contract
-  #   network: mainnet
-  #   source:
-  #     address: "0x6c3fc1ffdb14d92394f40eec91d9ce8b807f132d"
-  #     abi: YAMSNXPool
-  #     startBlock: 10636560
-  #   mapping:
-  #     kind: ethereum/events
-  #     apiVersion: 0.0.4
-  #     language: wasm/assemblyscript
-  #     file: ./src/pools.ts
-  #     entities:
-  #       - Pool
-  #     abis:
-  #       - name: YAMSNXPool
-  #         file: ./abis/YAMSNXPool.json
-  #       - name: YAM
-  #         file: ./abis/YAM.json
-  #     eventHandlers:
-  #       - event: Staked(indexed address,uint256)
-  #         handler: handleStaked
-  #       - event: Withdrawn(indexed address,uint256)
-  #         handler: handleWithdrawn
-  #       - event: RewardAdded(uint256)
-  #         handler: handleRewardAdded
-  #       - event: RewardPaid(indexed address,uint256)
-  #         handler: handleRewardPaid
-  # - name: YAMETHPool
-  #   kind: ethereum/contract
-  #   network: mainnet
-  #   source:
-  #     address: "0x587a07ce5c265a38dd6d42def1566ba73eeb06f5"
-  #     abi: YAMETHPool
-  #     startBlock: 10636560
-  #   mapping:
-  #     kind: ethereum/events
-  #     apiVersion: 0.0.4
-  #     language: wasm/assemblyscript
-  #     file: ./src/pools.ts
-  #     entities:
-  #       - Pool
-  #     abis:
-  #       - name: YAMETHPool
-  #         file: ./abis/YAMETHPool.json
-  #       - name: YAM
-  #         file: ./abis/YAM.json
-  #     eventHandlers:
-  #       - event: Staked(indexed address,uint256)
-  #         handler: handleStaked
-  #       - event: Withdrawn(indexed address,uint256)
-  #         handler: handleWithdrawn
-  #       - event: RewardAdded(uint256)
-  #         handler: handleRewardAdded
-  #       - event: RewardPaid(indexed address,uint256)
-  #         handler: handleRewardPaid
-  # - name: YAMYFIPool
-  #   kind: ethereum/contract
-  #   network: mainnet
-  #   source:
-  #     address: "0xc5b6488c7d5bed173b76bd5dca712f45fb9eaeab"
-  #     abi: YAMYFIPool
-  #     startBlock: 10636560
-  #   mapping:
-  #     kind: ethereum/events
-  #     apiVersion: 0.0.4
-  #     language: wasm/assemblyscript
-  #     file: ./src/pools.ts
-  #     entities:
-  #       - Pool
-  #     abis:
-  #       - name: YAMYFIPool
-  #         file: ./abis/YAMYFIPool.json
-  #       - name: YAM
-  #         file: ./abis/YAM.json
-  #     eventHandlers:
-  #       - event: Staked(indexed address,uint256)
-  #         handler: handleStaked
-  #       - event: Withdrawn(indexed address,uint256)
-  #         handler: handleWithdrawn
-  #       - event: RewardAdded(uint256)
-  #         handler: handleRewardAdded
-  #       - event: RewardPaid(indexed address,uint256)
-  #         handler: handleRewardPaid
-  # - name: YAMAMPLPool
-  #   kind: ethereum/contract
-  #   network: mainnet
-  #   source:
-  #     address: "0x9ebb67687fee2d265d7b824714df13622d90e663"
-  #     abi: YAMAMPLPool
-  #     startBlock: 10636560
-  #   mapping:
-  #     kind: ethereum/events
-  #     apiVersion: 0.0.4
-  #     language: wasm/assemblyscript
-  #     file: ./src/pools.ts
-  #     entities:
-  #       - Pool
-  #     abis:
-  #       - name: YAMAMPLPool
-  #         file: ./abis/YAMAMPLPool.json
-  #       - name: YAM
-  #         file: ./abis/YAM.json
-  #     eventHandlers:
-  #       - event: Staked(indexed address,uint256)
-  #         handler: handleStaked
-  #       - event: Withdrawn(indexed address,uint256)
-  #         handler: handleWithdrawn
-  #       - event: RewardAdded(uint256)
-  #         handler: handleRewardAdded
-  #       - event: RewardPaid(indexed address,uint256)
-  #         handler: handleRewardPaid
+  - name: YAMMKRPool
+    kind: ethereum/contract
+    network: mainnet
+    source:
+      address: "0xcfe1e539acb2d489a651ca011a6eb93d32f97e23"
+      abi: YAMMKRPool
+      startBlock: 10636560
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      file: ./src/pool-mapping/YAMMKRPool.ts
+      entities:
+        - Pool
+      abis:
+        - name: YAMMKRPool
+          file: ./abis/YAMMKRPool.json
+        - name: YAM
+          file: ./abis/YAM.json
+      eventHandlers:
+        - event: Staked(indexed address,uint256)
+          handler: handleStaked
+        - event: Withdrawn(indexed address,uint256)
+          handler: handleWithdrawn
+        - event: RewardAdded(uint256)
+          handler: handleRewardAdded
+        - event: RewardPaid(indexed address,uint256)
+          handler: handleRewardPaid
+  - name: YAMSNXPool
+    kind: ethereum/contract
+    network: mainnet
+    source:
+      address: "0x6c3fc1ffdb14d92394f40eec91d9ce8b807f132d"
+      abi: YAMSNXPool
+      startBlock: 10636560
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      file: ./src/pool-mapping/YAMSNXPool.ts
+      entities:
+        - Pool
+      abis:
+        - name: YAMSNXPool
+          file: ./abis/YAMSNXPool.json
+        - name: YAM
+          file: ./abis/YAM.json
+      eventHandlers:
+        - event: Staked(indexed address,uint256)
+          handler: handleStaked
+        - event: Withdrawn(indexed address,uint256)
+          handler: handleWithdrawn
+        - event: RewardAdded(uint256)
+          handler: handleRewardAdded
+        - event: RewardPaid(indexed address,uint256)
+          handler: handleRewardPaid
+  - name: YAMETHPool
+    kind: ethereum/contract
+    network: mainnet
+    source:
+      address: "0x587a07ce5c265a38dd6d42def1566ba73eeb06f5"
+      abi: YAMETHPool
+      startBlock: 10636560
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      file: ./src/pool-mapping/YAMETHPool.ts
+      entities:
+        - Pool
+      abis:
+        - name: YAMETHPool
+          file: ./abis/YAMETHPool.json
+        - name: YAM
+          file: ./abis/YAM.json
+      eventHandlers:
+        - event: Staked(indexed address,uint256)
+          handler: handleStaked
+        - event: Withdrawn(indexed address,uint256)
+          handler: handleWithdrawn
+        - event: RewardAdded(uint256)
+          handler: handleRewardAdded
+        - event: RewardPaid(indexed address,uint256)
+          handler: handleRewardPaid
+  - name: YAMYFIPool
+    kind: ethereum/contract
+    network: mainnet
+    source:
+      address: "0xc5b6488c7d5bed173b76bd5dca712f45fb9eaeab"
+      abi: YAMYFIPool
+      startBlock: 10636560
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      file: ./src/pool-mapping/YAMYFIPool.ts
+      entities:
+        - Pool
+      abis:
+        - name: YAMYFIPool
+          file: ./abis/YAMYFIPool.json
+        - name: YAM
+          file: ./abis/YAM.json
+      eventHandlers:
+        - event: Staked(indexed address,uint256)
+          handler: handleStaked
+        - event: Withdrawn(indexed address,uint256)
+          handler: handleWithdrawn
+        - event: RewardAdded(uint256)
+          handler: handleRewardAdded
+        - event: RewardPaid(indexed address,uint256)
+          handler: handleRewardPaid
+  - name: YAMAMPLPool
+    kind: ethereum/contract
+    network: mainnet
+    source:
+      address: "0x9ebb67687fee2d265d7b824714df13622d90e663"
+      abi: YAMAMPLPool
+      startBlock: 10636560
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      file: ./src/pool-mapping/YAMAMPLPool.ts
+      entities:
+        - Pool
+      abis:
+        - name: YAMAMPLPool
+          file: ./abis/YAMAMPLPool.json
+        - name: YAM
+          file: ./abis/YAM.json
+      eventHandlers:
+        - event: Staked(indexed address,uint256)
+          handler: handleStaked
+        - event: Withdrawn(indexed address,uint256)
+          handler: handleWithdrawn
+        - event: RewardAdded(uint256)
+          handler: handleRewardAdded
+        - event: RewardPaid(indexed address,uint256)
+          handler: handleRewardPaid

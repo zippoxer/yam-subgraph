@@ -5,19 +5,31 @@ import {
   RewardPaid,
   YAMETHPool,
 } from "../../generated/YAMETHPool/YAMETHPool";
-import { Pool } from "../../generated/schema";
+import { Pool, PoolHourData } from "../../generated/schema";
 import { ethereum, BigInt, log } from "@graphprotocol/graph-ts";
 import { YAM } from "../../generated/YAM/YAM";
 
 export function handleStaked(event: Staked): void {
   let pool = getPool(event);
-  pool.staked = pool.staked.plus(event.params.amount);
+  pool.balance = pool.balance.plus(event.params.amount);
   pool.save();
+
+  let poolHourData = updateHourData(event, pool);
+  poolHourData.hourlyDepositVolume = poolHourData.hourlyDepositVolume.plus(
+    event.params.amount
+  );
+  poolHourData.save();
 }
 export function handleWithdrawn(event: Withdrawn): void {
   let pool = getPool(event);
-  pool.staked = pool.staked.minus(event.params.amount);
+  pool.balance = pool.balance.minus(event.params.amount);
   pool.save();
+
+  let poolHourData = updateHourData(event, pool);
+  poolHourData.hourlyWithdrawalVolume = poolHourData.hourlyWithdrawalVolume.plus(
+    event.params.amount
+  );
+  poolHourData.save();
 }
 export function handleRewardAdded(event: RewardAdded): void {
   let pool = getPool(event);
@@ -33,7 +45,7 @@ export function handleRewardPaid(event: RewardPaid): void {
   let pool = getPool(event);
 
   let contract = YAMETHPool.bind(event.address);
-  const yam = YAM.bind(contract.yam());
+  let yam = YAM.bind(contract.yam());
   pool.rewardPaid = pool.rewardPaid.plus(
     event.params.reward
       .times(BigInt.fromI32(1).pow(18))
@@ -43,16 +55,36 @@ export function handleRewardPaid(event: RewardPaid): void {
   pool.save();
 }
 
+function updateHourData(event: ethereum.Event, pool: Pool): PoolHourData {
+  let timestamp = event.block.timestamp.toI32();
+  let hourIndex = timestamp / 3600; // get unique hour within unix history
+  let hourStartUnix = hourIndex * 3600; // want the rounded effect
+  let hourPoolID = event.address
+    .toHexString()
+    .concat("-")
+    .concat(BigInt.fromI32(hourIndex).toString());
+  let poolHourData = PoolHourData.load(hourPoolID);
+  if (poolHourData == null) {
+    poolHourData = new PoolHourData(hourPoolID);
+    poolHourData.hourStartUnix = hourStartUnix;
+    poolHourData.pool = pool.id;
+    poolHourData.hourlyDepositVolume = BigInt.fromI32(0);
+    poolHourData.hourlyWithdrawalVolume = BigInt.fromI32(0);
+  }
+  poolHourData.balance = pool.balance;
+  return poolHourData as PoolHourData;
+}
+
 function getPool(event: ethereum.Event): Pool {
   let pool = Pool.load("6");
 
   if (pool == null) {
-    pool = new Pool("6");
+    pool = new Pool(event.address.toHexString());
     pool.rewardRate = BigInt.fromI32(0);
     pool.startTime = BigInt.fromI32(1597172400);
     pool.periodFinish = BigInt.fromI32(0);
     pool.duration = BigInt.fromI32(625000);
-    pool.staked = BigInt.fromI32(0);
+    pool.balance = BigInt.fromI32(0);
     pool.rewardAllocated = BigInt.fromI32(0);
     pool.rewardPaid = BigInt.fromI32(0);
   }
