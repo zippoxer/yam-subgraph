@@ -24,4 +24,5 @@ type PoolHourData @entity {
   balance: BigInt!
   hourlyDepositVolume: BigInt!
   hourlyWithdrawalVolume: BigInt!
+  ticks: [BigInt!]!
 }

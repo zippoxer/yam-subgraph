@@ -247,4 +247,13 @@ export class PoolHourData extends Entity {
   set hourlyWithdrawalVolume(value: BigInt) {
     this.set("hourlyWithdrawalVolume", Value.fromBigInt(value));
   }
+
+  get ticks(): Array<BigInt> {
+    let value = this.get("ticks");
+    return value.toBigIntArray();
+  }
+
+  set ticks(value: Array<BigInt>) {
+    this.set("ticks", Value.fromBigIntArray(value));
+  }
 }

@@ -76,7 +76,7 @@ function updateHourData(event: ethereum.Event, pool: Pool): PoolHourData {
 }
 
 function getPool(event: ethereum.Event): Pool {
-  let pool = Pool.load("7");
+  let pool = Pool.load(event.address.toHexString());
 
   if (pool == null) {
     pool = new Pool(event.address.toHexString());

@@ -56,6 +56,7 @@ export function handleRewardPaid(event: RewardPaid): void {
 }
 
 function updateHourData(event: ethereum.Event, pool: Pool): PoolHourData {
+  const tickAmount = 12;
   let timestamp = event.block.timestamp.toI32();
   let hourIndex = timestamp / 3600; // get unique hour within unix history
   let hourStartUnix = hourIndex * 3600; // want the rounded effect
@@ -70,13 +71,15 @@ function updateHourData(event: ethereum.Event, pool: Pool): PoolHourData {
     poolHourData.pool = pool.id;
     poolHourData.hourlyDepositVolume = BigInt.fromI32(0);
     poolHourData.hourlyWithdrawalVolume = BigInt.fromI32(0);
+    poolHourData.ticks = new Array(tickAmount).fill(0);
   }
   poolHourData.balance = pool.balance;
+  poolHourData.ticks[timestamp] = pool.balance;
   return poolHourData as PoolHourData;
 }
 
 function getPool(event: ethereum.Event): Pool {
-  let pool = Pool.load("TemplatePoolId");
+  let pool = Pool.load(event.address.toHexString());
 
   if (pool == null) {
     pool = new Pool(event.address.toHexString());
